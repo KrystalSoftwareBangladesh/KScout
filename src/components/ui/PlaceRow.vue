@@ -97,29 +97,3 @@ const typeChips = computed(() => {
     </td>
   </tr>
 </template>
-
-<style scoped>
-.place-row__address {
-  max-width: 28ch;
-}
-
-.place-row__status,
-.place-row__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.place-row__badge {
-  display: inline-grid;
-  place-items: center;
-  min-width: 20px;
-  height: 20px;
-  padding-inline: var(--space-1);
-  border-radius: 999px;
-  background: var(--accent-dim);
-  color: var(--accent);
-  font-size: 0.74rem;
-  font-weight: 800;
-}
-</style>

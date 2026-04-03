@@ -23,7 +23,9 @@ Agents should treat `KScout` as the active product name unless the user asks to 
 - Build tool: Vite `5`
 - Router: Vue Router `4` with hash routing
 - State management: Pinia `2.3.1`
-- Styling status: custom CSS/tokens are currently in use; TailwindCSS `3.4.3` is planned but not added yet
+- Styling: TailwindCSS `3.4.3` with PostCSS + Autoprefixer
+- Global styling entrypoint: `src/assets/global.css`
+- Tailwind config: `tailwind.config.js`
 - Testing: Vitest is installed
 - Backend plan from user context: FastAPI
 - Database plan from user context: PostgreSQL
@@ -35,6 +37,7 @@ Agents should treat `KScout` as the active product name unless the user asks to 
 - Not done yet: API integration
 - Known bugs from user context: none currently queued
 - Today's broader goal from user context: design the remaining parts of the tool and integrate APIs
+- Styling migration status: the previous component-scoped raw CSS has been replaced by a Tailwind-based styling layer
 
 ## Current Frontend Shape
 
@@ -64,6 +67,7 @@ Current notable views/routes in the repo:
 - Do not introduce `any`
 - Prefer named exports
 - Put API calls in `/lib/api.ts` only
+- Prefer Tailwind utilities or Tailwind-based component layers over ad hoc scoped CSS
 
 ## Working Assumptions For Future Agents
 
@@ -71,7 +75,7 @@ Current notable views/routes in the repo:
 - Expect API integration work to be in progress or partially stubbed
 - Preserve existing UI patterns unless the user asks for a redesign
 - If touching branding or docs, check whether the user wants `ShopFinder` renamed to `KScout` across the repo
-- Before adding Tailwind, confirm whether the user wants to migrate from the current CSS system or run both temporarily
+- Use the Tailwind setup already in the repo instead of reintroducing new raw component-scoped styles unless there is a strong reason
 
 ## Local Development Notes
 

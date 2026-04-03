@@ -25,36 +25,3 @@ const emit = defineEmits<{
     </button>
   </div>
 </template>
-
-<style scoped>
-.empty {
-  display: grid;
-  place-items: center;
-  gap: var(--space-3);
-  min-height: 240px;
-  padding: var(--space-6);
-  text-align: center;
-}
-
-.empty__icon {
-  display: grid;
-  place-items: center;
-  width: 60px;
-  height: 60px;
-  border: 1px solid var(--border2);
-  border-radius: 20px;
-  background: rgba(17, 50, 57, 0.82);
-  color: var(--accent);
-  font-size: 1.6rem;
-}
-
-.empty h3,
-.empty p {
-  margin: 0;
-}
-
-.empty p {
-  max-width: 48ch;
-  color: var(--text-muted);
-}
-</style>

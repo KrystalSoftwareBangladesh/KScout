@@ -187,13 +187,3 @@ watch(selectedSessionId, async () => {
     />
   </div>
 </template>
-
-<style scoped>
-.raw-data__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-</style>

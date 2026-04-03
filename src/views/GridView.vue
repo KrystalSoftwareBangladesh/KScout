@@ -153,19 +153,3 @@ watch(selectedSessionId, async () => {
     />
   </div>
 </template>
-
-<style scoped>
-.grid-view__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-
-.grid-view__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-</style>

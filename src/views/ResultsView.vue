@@ -201,25 +201,3 @@ watch(
     />
   </div>
 </template>
-
-<style scoped>
-.results__toolbar-main {
-  flex: 1;
-}
-
-.results__search {
-  min-width: min(28rem, 100%);
-}
-
-.results__session-select {
-  min-width: 15rem;
-}
-
-@media (max-width: 900px) {
-  .results__search,
-  .results__session-select {
-    width: 100%;
-    min-width: 100%;
-  }
-}
-</style>
