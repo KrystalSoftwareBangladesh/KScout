@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useToastStore } from '@/stores/toast'
+import type { RawApiResponse } from '@/types/domain'
 
 const props = defineProps<{
   open: boolean
-  response: Record<string, any> | null
+  response: RawApiResponse | null
 }>()
 
 const emit = defineEmits<{

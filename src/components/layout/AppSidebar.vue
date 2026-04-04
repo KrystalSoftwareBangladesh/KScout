@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useSessionsStore } from '@/stores/sessions'
+import type { SessionItem } from '@/types/domain'
 
 defineProps<{
   open: boolean
@@ -45,7 +46,7 @@ const openSession = (sessionId: string | number) => {
   emit('close')
 }
 
-const progressWidth = (session: Record<string, any>) => {
+const progressWidth = (session: SessionItem) => {
   const total = Number(session.total_cells || 0)
   const done = Number(session.cells_done || 0)
 

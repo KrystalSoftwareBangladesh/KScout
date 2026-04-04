@@ -1,20 +1,22 @@
 import { defineStore } from 'pinia'
 import { useApi } from '@/composables/useApi'
 import { useToastStore } from '@/stores/toast'
+import type {
+  CollectionFetchResult,
+  GridCell,
+  SessionItem,
+  SessionStats,
+} from '@/types/domain'
 
-type SessionItem = Record<string, any>
-type StatsPayload = Record<string, any>
-type GridCell = Record<string, any>
-
-const emptyStats = () => ({
+const emptyStats = (): SessionStats => ({
   total_places: 0,
   total_sessions: 0,
   avg_rating: 0,
   with_website: 0,
   with_phone: 0,
   with_rating: 0,
-  top_locations: [] as Array<{ location: string; count: number }>,
-  top_types: [] as Array<{ type: string; count: number }>,
+  top_locations: [],
+  top_types: [],
 })
 
 function sortSessions(list: SessionItem[]) {
@@ -28,7 +30,7 @@ function sortSessions(list: SessionItem[]) {
 export const useSessionsStore = defineStore('sessions', {
   state: () => ({
     list: [] as SessionItem[],
-    stats: emptyStats() as StatsPayload,
+    stats: emptyStats(),
     loading: false,
     fetching: null as number | string | null,
     grids: {} as Record<string, GridCell[]>,
@@ -62,7 +64,7 @@ export const useSessionsStore = defineStore('sessions', {
       try {
         const [sessions, stats] = await Promise.all([
           request<SessionItem[]>('/api/sessions'),
-          request<StatsPayload>('/api/stats'),
+          request<SessionStats>('/api/stats'),
         ])
 
         this.list = sortSessions(Array.isArray(sessions) ? sessions : [])
@@ -108,7 +110,7 @@ export const useSessionsStore = defineStore('sessions', {
       this.fetching = id
 
       try {
-        const result = await request<Record<string, any>>(`/api/sessions/${id}/fetch`, {
+        const result = await request<CollectionFetchResult>(`/api/sessions/${id}/fetch`, {
           method: 'POST',
         })
 

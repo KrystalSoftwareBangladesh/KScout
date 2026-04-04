@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { reactive, watch } from 'vue'
+import { createPlaceFilters, type PlaceFiltersState } from '@/types/domain'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: Record<string, any>
+    modelValue: PlaceFiltersState
     open?: boolean
   }>(),
   {
@@ -12,16 +13,10 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  'update:modelValue': [value: Record<string, any>]
+  'update:modelValue': [value: PlaceFiltersState]
 }>()
 
-const localFilters = reactive({
-  minRating: 0,
-  hasPhone: false,
-  hasWebsite: false,
-  isOpen: false,
-  status: '',
-})
+const localFilters = reactive(createPlaceFilters())
 
 let timeoutId = 0
 

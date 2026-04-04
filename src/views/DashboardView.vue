@@ -6,13 +6,18 @@ import EmptyState from '@/components/ui/EmptyState.vue'
 import { useApi } from '@/composables/useApi'
 import { useSessionsStore } from '@/stores/sessions'
 import { useToastStore } from '@/stores/toast'
+import type {
+  CollectionFetchResult,
+  PlaceItem,
+  PlacesResponse,
+} from '@/types/domain'
 
 const sessionsStore = useSessionsStore()
 const toast = useToastStore()
 const { request } = useApi()
-const recentPlaces = ref<Array<Record<string, any>>>([])
+const recentPlaces = ref<PlaceItem[]>([])
 const loadingRecent = ref(false)
-const lastResults = ref<Record<string, any>>({})
+const lastResults = ref<Record<string, CollectionFetchResult>>({})
 
 const statCards = computed(() => [
   {
@@ -65,14 +70,14 @@ const topLocations = computed(() => sessionsStore.stats.top_locations || [])
 const topTypes = computed(() => sessionsStore.stats.top_types || [])
 
 const maxLocationCount = computed(() =>
-  Math.max(...topLocations.value.map((item: Record<string, any>) => Number(item.count || 0)), 1),
+  Math.max(...topLocations.value.map((item) => Number(item.count || 0)), 1),
 )
 
 const loadRecentPlaces = async () => {
   loadingRecent.value = true
 
   try {
-    const payload = await request<{ places: Array<Record<string, any>> }>('/api/places', {
+    const payload = await request<PlacesResponse>('/api/places', {
       query: {
         page: 1,
         per_page: 8,

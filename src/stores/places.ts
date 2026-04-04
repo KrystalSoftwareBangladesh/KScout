@@ -1,16 +1,12 @@
 import { defineStore } from 'pinia'
 import { useApi } from '@/composables/useApi'
 import { useToastStore } from '@/stores/toast'
-
-type PlaceItem = Record<string, any>
-
-const defaultFilters = () => ({
-  minRating: 0,
-  hasPhone: false,
-  hasWebsite: false,
-  isOpen: false,
-  status: '',
-})
+import {
+  createPlaceFilters,
+  type PlaceFiltersState,
+  type PlaceItem,
+  type PlacesResponse,
+} from '@/types/domain'
 
 function triggerDownload(url: string) {
   const link = document.createElement('a')
@@ -30,7 +26,7 @@ export const usePlacesStore = defineStore('places', {
     perPage: 12,
     search: '',
     sessionId: '',
-    filters: defaultFilters(),
+    filters: createPlaceFilters() as PlaceFiltersState,
     loading: false,
   }),
 
@@ -49,12 +45,7 @@ export const usePlacesStore = defineStore('places', {
       this.page = nextPage
 
       try {
-        const payload = await request<{
-          places: PlaceItem[]
-          total: number
-          page: number
-          per_page: number
-        }>('/api/places', {
+        const payload = await request<PlacesResponse>('/api/places', {
           query: {
             session_id: this.sessionId || undefined,
             search: this.search || undefined,
@@ -117,7 +108,7 @@ export const usePlacesStore = defineStore('places', {
     },
 
     resetFilters() {
-      this.filters = defaultFilters()
+      this.filters = createPlaceFilters()
     },
   },
 })

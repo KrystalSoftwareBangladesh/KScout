@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import type { CollectionFetchResult, SessionItem } from '@/types/domain'
 
 const props = defineProps<{
-  session: Record<string, any>
+  session: SessionItem
   isFetching: boolean
-  lastResult?: Record<string, any> | null
+  lastResult?: CollectionFetchResult | null
 }>()
 
 const emit = defineEmits<{

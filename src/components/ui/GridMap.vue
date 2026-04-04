@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import type { BoundingBox, EntityId, GridCell } from '@/types/domain'
+
+type NormalizedGridCell = GridCell & {
+  left: number
+  top: number
+  width: number
+  height: number
+  intensity: number
+}
 
 const props = withDefaults(
   defineProps<{
-    cells: Array<Record<string, any>>
-    bbox?: Record<string, any> | null
-    activeCellId?: string | number | null
+    cells: GridCell[]
+    bbox?: BoundingBox | null
+    activeCellId?: EntityId | null
   }>(),
   {
     bbox: null,
@@ -14,27 +23,27 @@ const props = withDefaults(
 )
 
 const tooltip = ref<{
-  cell: Record<string, any>
+  cell: NormalizedGridCell
   x: number
   y: number
 } | null>(null)
 
 const latSpan = computed(() => {
-  const bbox = props.bbox || {}
+  const bbox: BoundingBox = props.bbox ?? {}
   return Math.max(Number(bbox.ne_lat || 0) - Number(bbox.sw_lat || 0), 0.001)
 })
 
 const lngSpan = computed(() => {
-  const bbox = props.bbox || {}
+  const bbox: BoundingBox = props.bbox ?? {}
   return Math.max(Number(bbox.ne_lng || 0) - Number(bbox.sw_lng || 0), 0.001)
 })
 
 const aspectRatio = computed(() => `${lngSpan.value} / ${latSpan.value}`)
 
 const normalizedCells = computed(() => {
-  const bbox = props.bbox || {}
+  const bbox: BoundingBox = props.bbox ?? {}
 
-  return props.cells.map((cell): Record<string, any> => {
+  return props.cells.map((cell): NormalizedGridCell => {
     const left = ((Number(cell.sw_lng) - Number(bbox.sw_lng || 0)) / lngSpan.value) * 100
     const width = ((Number(cell.ne_lng) - Number(cell.sw_lng)) / lngSpan.value) * 100
     const top = ((Number(bbox.ne_lat || 0) - Number(cell.ne_lat)) / latSpan.value) * 100
@@ -52,7 +61,7 @@ const normalizedCells = computed(() => {
   })
 })
 
-const showTooltip = (event: MouseEvent, cell: Record<string, any>) => {
+const showTooltip = (event: MouseEvent, cell: NormalizedGridCell) => {
   tooltip.value = {
     cell,
     x: event.offsetX + 16,
@@ -64,7 +73,7 @@ const hideTooltip = () => {
   tooltip.value = null
 }
 
-const cellClass = (cell: Record<string, any>) => {
+const cellClass = (cell: GridCell) => {
   const status = String(cell.status || 'pending').toLowerCase()
 
   return {

@@ -5,6 +5,7 @@ import EmptyState from '@/components/ui/EmptyState.vue'
 import { useApi } from '@/composables/useApi'
 import { useSessionsStore } from '@/stores/sessions'
 import { useToastStore } from '@/stores/toast'
+import type { RawApiResponse, RawResponsesPayload } from '@/types/domain'
 
 const sessionsStore = useSessionsStore()
 const toast = useToastStore()
@@ -12,11 +13,21 @@ const { request } = useApi()
 
 const selectedSessionId = ref('')
 const loading = ref(false)
-const responses = ref<Array<Record<string, any>>>([])
+const responses = ref<RawApiResponse[]>([])
 const total = ref(0)
 const page = ref(1)
 const perPage = ref(10)
-const activeResponse = ref<Record<string, any> | null>(null)
+const activeResponse = ref<RawApiResponse | null>(null)
+
+const formatCalledAt = (value: string | null | undefined) => {
+  if (!value) {
+    return 'Unknown'
+  }
+
+  const timestamp = Date.parse(value)
+
+  return Number.isNaN(timestamp) ? value : new Date(timestamp).toLocaleString()
+}
 
 const loadResponses = async () => {
   if (!selectedSessionId.value) {
@@ -28,10 +39,7 @@ const loadResponses = async () => {
   loading.value = true
 
   try {
-    const payload = await request<{
-      responses: Array<Record<string, any>>
-      total: number
-    }>(`/api/sessions/${selectedSessionId.value}/raw`, {
+    const payload = await request<RawResponsesPayload>(`/api/sessions/${selectedSessionId.value}/raw`, {
       query: {
         page: page.value,
         per_page: perPage.value,
@@ -113,7 +121,7 @@ watch(selectedSessionId, async () => {
             </tbody>
             <tbody v-else-if="responses.length">
               <tr v-for="response in responses" :key="response.id">
-                <td>{{ new Date(response.called_at).toLocaleString() }}</td>
+                <td>{{ formatCalledAt(response.called_at) }}</td>
                 <td>{{ response.api_type }}</td>
                 <td>{{ response.page_number || 1 }}</td>
                 <td>{{ response.places_count || 0 }}</td>

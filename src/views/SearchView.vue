@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import SessionCard from '@/components/ui/SessionCard.vue'
 import EmptyState from '@/components/ui/EmptyState.vue'
 import { useSessionsStore } from '@/stores/sessions'
+import type { CollectionFetchResult } from '@/types/domain'
 
 const route = useRoute()
 const sessionsStore = useSessionsStore()
@@ -16,7 +17,7 @@ const createForm = reactive({
 
 const creating = ref(false)
 const createStatus = ref('')
-const lastResults = ref<Record<string, any>>({})
+const lastResults = ref<Record<string, CollectionFetchResult>>({})
 
 const cellOptions = [
   {

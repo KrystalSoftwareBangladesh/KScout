@@ -7,13 +7,14 @@ import ReviewsModal from '@/components/ui/ReviewsModal.vue'
 import EmptyState from '@/components/ui/EmptyState.vue'
 import { usePlacesStore } from '@/stores/places'
 import { useSessionsStore } from '@/stores/sessions'
+import type { PlaceFiltersState, PlaceItem } from '@/types/domain'
 
 const route = useRoute()
 const placesStore = usePlacesStore()
 const sessionsStore = useSessionsStore()
 
 const filtersOpen = ref(false)
-const reviewPlace = ref<Record<string, any> | null>(null)
+const reviewPlace = ref<PlaceItem | null>(null)
 let searchDebounce = 0
 
 const syncSessionFromRoute = () => {
@@ -35,7 +36,7 @@ const onSessionChange = async () => {
   await placesStore.applyFilters()
 }
 
-const onFiltersChange = async (value: Record<string, any>) => {
+const onFiltersChange = async (value: PlaceFiltersState) => {
   placesStore.filters = {
     ...placesStore.filters,
     ...value,

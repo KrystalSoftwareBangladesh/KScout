@@ -47,7 +47,7 @@ export function useApi() {
     return url.toString()
   }
 
-  const request = async <T = any>(path: string, options: RequestOptions = {}) => {
+  const request = async <T = unknown>(path: string, options: RequestOptions = {}) => {
     const { method = 'GET', body, headers = {}, query = {}, baseUrl } = options
     const hasJsonBody =
       body !== undefined && body !== null && !(body instanceof FormData) && typeof body !== 'string'

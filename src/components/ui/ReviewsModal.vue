@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted } from 'vue'
+import type { PlaceItem } from '@/types/domain'
 
 const props = defineProps<{
   open: boolean
-  place: Record<string, any> | null
+  place: PlaceItem | null
 }>()
 
 const emit = defineEmits<{

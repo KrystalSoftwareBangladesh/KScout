@@ -2,13 +2,14 @@
 import { computed, ref } from 'vue'
 import { useApi } from '@/composables/useApi'
 import { useToastStore } from '@/stores/toast'
+import type { HealthPayload } from '@/types/domain'
 
 const toast = useToastStore()
 const { request } = useApi()
 
 const connectionUrl = ref('http://localhost:5000')
 const testing = ref(false)
-const connectionResult = ref<Record<string, any> | null>(null)
+const connectionResult = ref<HealthPayload | null>(null)
 const connected = ref<boolean | null>(null)
 
 const setupSteps = [
@@ -40,7 +41,7 @@ const setupSteps = [
 ]
 
 const apiKeyState = computed(() => {
-  const payload = connectionResult.value || {}
+  const payload: HealthPayload = connectionResult.value ?? {}
 
   if (
     payload.api_key_valid === true ||
@@ -70,7 +71,7 @@ const testConnection = async () => {
   testing.value = true
 
   try {
-    const payload = await request('/api/health', {
+    const payload = await request<HealthPayload>('/api/health', {
       baseUrl: connectionUrl.value,
     })
 

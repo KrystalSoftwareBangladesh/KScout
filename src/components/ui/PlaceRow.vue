@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { PlaceItem } from '@/types/domain'
 
 const props = defineProps<{
-  place: Record<string, any>
+  place: PlaceItem
   index: number
 }>()
 
 const emit = defineEmits<{
-  reviews: [place: Record<string, any>]
+  reviews: [place: PlaceItem]
 }>()
 
 const typeChips = computed(() => {
