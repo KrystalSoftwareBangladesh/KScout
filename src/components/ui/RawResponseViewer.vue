@@ -36,7 +36,7 @@ const syntaxHighlighted = computed(() => {
     .replace(/>/g, '&gt;')
 
   return safe.replace(
-    /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\btrue\b|\bfalse\b|\bnull\b|-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?)/g,
+    /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\btrue\b|\bfalse\b|\bnull\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g,
     (match) => {
       let type = 'number'
 
@@ -75,18 +75,14 @@ const copyPayload = async () => {
             </div>
 
             <div class="viewer__actions">
-              <button
-                type="button"
+              <button type="button"
                 :class="['button button--ghost button--sm', { 'viewer__tab--active': activeTab === 'request' }]"
-                @click="activeTab = 'request'"
-              >
+                @click="activeTab = 'request'">
                 Request Body
               </button>
-              <button
-                type="button"
+              <button type="button"
                 :class="['button button--ghost button--sm', { 'viewer__tab--active': activeTab === 'response' }]"
-                @click="activeTab = 'response'"
-              >
+                @click="activeTab = 'response'">
                 Response Body
               </button>
               <button type="button" class="button button--soft button--sm" @click="copyPayload">

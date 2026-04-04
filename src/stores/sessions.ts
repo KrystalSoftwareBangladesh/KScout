@@ -68,7 +68,7 @@ export const useSessionsStore = defineStore('sessions', {
         this.list = sortSessions(Array.isArray(sessions) ? sessions : [])
         this.stats = {
           ...emptyStats(),
-          ...(stats || {}),
+          ...stats,
         }
       } catch (error) {
         toast.error('Unable to load workspace', (error as Error).message)

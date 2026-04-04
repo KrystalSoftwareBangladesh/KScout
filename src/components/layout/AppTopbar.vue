@@ -17,7 +17,7 @@ const lastCheckedAt = ref('')
 const statusLabel = ref('Checking')
 let intervalId = 0
 
-const title = computed(() => String(route.meta.title || 'ShopFinder'))
+const title = computed(() => String(route.meta.title || 'KScout'))
 const subtitle = computed(() => String(route.meta.subtitle || 'Business intelligence workspace'))
 const endpointLabel = computed(() => (defaultBaseUrl || 'http://localhost:5000 (via proxy)'))
 
@@ -47,11 +47,7 @@ onBeforeUnmount(() => {
 <template>
   <header class="topbar">
     <div class="topbar__left">
-      <button
-        type="button"
-        class="topbar__menu button button--ghost button--sm"
-        @click="emit('toggleSidebar')"
-      >
+      <button type="button" class="topbar__menu button button--ghost button--sm" @click="emit('toggleSidebar')">
         ☰
       </button>
 

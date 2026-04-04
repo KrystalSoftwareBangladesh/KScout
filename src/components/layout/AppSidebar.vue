@@ -63,7 +63,7 @@ const progressWidth = (session: Record<string, any>) => {
       <div class="sidebar__brand">
         <div class="sidebar__logo">▣</div>
         <div>
-          <h1>ShopFinder</h1>
+          <h1>KScout</h1>
           <p>Business Intelligence Platform</p>
         </div>
       </div>
@@ -74,14 +74,8 @@ const progressWidth = (session: Record<string, any>) => {
         <header class="sidebar__section-head">Platform</header>
 
         <nav class="sidebar__nav">
-          <RouterLink
-            v-for="item in platformItems"
-            :key="item.to"
-            :to="item.to"
-            class="sidebar__link"
-            :class="{ 'sidebar__link--active': route.path === item.to }"
-            @click="emit('close')"
-          >
+          <RouterLink v-for="item in platformItems" :key="item.to" :to="item.to" class="sidebar__link"
+            :class="{ 'sidebar__link--active': route.path === item.to }" @click="emit('close')">
             <span>{{ item.icon }}</span>
             <span>{{ item.label }}</span>
           </RouterLink>
@@ -95,11 +89,7 @@ const progressWidth = (session: Record<string, any>) => {
         </header>
 
         <div class="sidebar__nav sidebar__nav--disabled">
-          <div
-            v-for="item in comingSoonItems"
-            :key="item.label"
-            class="sidebar__link sidebar__link--disabled"
-          >
+          <div v-for="item in comingSoonItems" :key="item.label" class="sidebar__link sidebar__link--disabled">
             <span>{{ item.icon }}</span>
             <span>{{ item.label }}</span>
           </div>
@@ -113,22 +103,12 @@ const progressWidth = (session: Record<string, any>) => {
         </header>
 
         <div v-if="sessionsStore.loading && !sessionsStore.list.length" class="sidebar__session-list">
-          <div
-            v-for="index in 4"
-            :key="index"
-            class="sidebar__session skeleton"
-          />
+          <div v-for="index in 4" :key="index" class="sidebar__session skeleton" />
         </div>
 
         <div v-else-if="visibleSessions.length" class="sidebar__session-list">
-          <button
-            v-for="session in visibleSessions"
-            :key="session.id"
-            type="button"
-            class="sidebar__session"
-            :class="{ 'sidebar__session--active': isSessionActive(session.id) }"
-            @click="openSession(session.id)"
-          >
+          <button v-for="session in visibleSessions" :key="session.id" type="button" class="sidebar__session"
+            :class="{ 'sidebar__session--active': isSessionActive(session.id) }" @click="openSession(session.id)">
             <div class="sidebar__session-top">
               <strong>{{ session.query }}</strong>
               <span :class="['badge', session.is_exhausted ? 'badge--gold' : 'badge--accent']">

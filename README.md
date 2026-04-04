@@ -1,6 +1,6 @@
-# ShopFinder
+# KScout
 
-ShopFinder is a Vue 3 single-page application for grid-based business discovery. Phase 1 focuses on place finding: create a session, geocode a territory through the backend, generate search cells, collect Google Places results, inspect raw payloads, and export the saved businesses. The UI is already structured so Phase 2 client-finding workflows can be added without reorganizing the app shell.
+KScout is a Vue 3 single-page application for grid-based business discovery. Phase 1 focuses on place finding: create a session, geocode a territory through the backend, generate search cells, collect Google Places results, inspect raw payloads, and export the saved businesses. The UI is already structured so Phase 2 client-finding workflows can be added without reorganizing the app shell.
 
 ## Stack
 

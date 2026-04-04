@@ -3,16 +3,13 @@
 ## Project Identity
 
 - Canonical project name: `KScout`
-- Legacy repo/app name still present in codebase: `ShopFinder`
+- A previous repo/app name existed historically
 - Purpose: a frontend tool that helps users discover places from the Google Places API based on a location, then identify potential clients for a user-provided niche
 - Current owner context: user is working as the frontend expert
 
 ## Important Naming Note
 
-Some repository metadata still uses the older `ShopFinder` name:
-
-- `package.json` -> `"name": "shopfinder"`
-- `README.md` -> project title and docs still say `ShopFinder`
+An older project name may still appear in historical discussion, but active repo branding should use `KScout`.
 
 Agents should treat `KScout` as the active product name unless the user asks to preserve or update the older branding.
 
@@ -74,7 +71,7 @@ Current notable views/routes in the repo:
 - Do not assume the backend is finished
 - Expect API integration work to be in progress or partially stubbed
 - Preserve existing UI patterns unless the user asks for a redesign
-- If touching branding or docs, check whether the user wants `ShopFinder` renamed to `KScout` across the repo
+- If historical references to an older project name appear again, treat them as legacy naming unless the user asks otherwise
 - Use the Tailwind setup already in the repo instead of reintroducing new raw component-scoped styles unless there is a strong reason
 
 ## Local Development Notes
