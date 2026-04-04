@@ -18,6 +18,7 @@ Agents should treat `KScout` as the active product name unless the user asks to 
 - Framework: Vue `3.4.38`
 - Language: TypeScript
 - Build tool: Vite `5`
+- Environment modes: `development`, `stage`, `production`
 - Router: Vue Router `4` with hash routing
 - State management: Pinia `2.3.1`
 - Styling: TailwindCSS `3.4.3` with PostCSS + Autoprefixer
@@ -77,9 +78,19 @@ Current notable views/routes in the repo:
 ## Local Development Notes
 
 - Package manager: `pnpm`
+- Environment files:
+  - `.env.development`
+  - `.env.stage`
+  - `.env.production`
 - Common scripts:
   - `pnpm dev`
+  - `pnpm dev:stage`
+  - `pnpm dev:prod`
   - `pnpm build`
+  - `pnpm build:dev`
+  - `pnpm build:stage`
+  - `pnpm build:prod`
+  - `pnpm start:prod`
   - `pnpm test:unit`
   - `pnpm lint`
   - `pnpm format`

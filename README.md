@@ -18,13 +18,36 @@ pnpm install
 pnpm dev
 ```
 
-The frontend expects the Flask backend at `http://localhost:5000`. Vite proxies `/api/*` to that backend during development.
+Additional environment-aware dev commands:
+
+```sh
+pnpm dev:stage
+pnpm dev:prod
+```
+
+The frontend now supports three Vite modes:
+
+- `development` via `.env.development`
+- `stage` via `.env.stage`
+- `production` via `.env.production`
+
+`VITE_API_BASE_URL` controls the frontend request base URL, and `VITE_API_PROXY_TARGET` controls the Vite dev-server proxy target for `/api/*`.
 
 ## Build
 
 ```sh
 pnpm build
 ```
+
+Explicit mode builds are also available:
+
+```sh
+pnpm build:dev
+pnpm build:stage
+pnpm build:prod
+```
+
+`pnpm start:prod` previews the production build on port `4173`.
 
 ## Views
 
